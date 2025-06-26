@@ -1,0 +1,84 @@
+version: ""
+
+formatter: markdown table
+
+content: |-
+  # terraform-aws-security-hub
+
+  GitHub: [fortellar/terraform-aws-security-hub](https://github.com/fortellar/terraform-aws-security-hub)
+
+  Fortellar Fork of AWS Security Hub Module
+
+  This module enables AWS Security Hub in one region of one account and optionally sets up an SNS topic to receive notifications of its findings.
+
+  Usage
+  For a complete example, see examples/complete.
+
+  For automated tests of the complete example using bats and Terratest (which tests and deploys the example on AWS), see test.
+
+  Here's how to invoke this module in your projects:
+
+  ```hcl
+  module "securityhub" {
+    source = "github.com/fortellar/terraform-aws-security-hub.git?ref=vx.x.x"
+    # Fortellar recommends pinning every module to a specific version
+
+    create_sns_topic = true
+    subscribers = {
+      opsgenie = {
+        protocol               = "https"
+        endpoint               = "https://api.example.com/v1/"
+        endpoint_auto_confirms = true
+        raw_message_delivery   = false
+      }
+    }
+  }
+  ```
+
+  ## Examples
+
+  Here is an example of using this module:
+  - [`examples/complete`](https://github.com/cloudposse/terraform-aws-security-hub/tree/master/examples/complete/) - complete example of using this module
+
+  ---
+
+  {{ .Requirements }}
+
+  {{ .Resources }}
+
+  {{ .Inputs }}
+
+  {{ .Outputs }}
+
+  ---
+
+  ### Before this is applied, you need to configure the git hook on your local machine
+  ```bash
+  # Test your pre-commit hooks - This will force them to run on all files
+  pre-commit run --all-files
+
+  # Add your pre-commit hooks forever
+  pre-commit install
+  ```
+
+  Note: Before reading, uncomment the code for the environment that you
+  wish to apply the code to. This goes for both the init-tfvars and apply-tfvars
+  folders.
+
+  Note, manual changes to the README will be overwritten when the documentation is updated. To update the documentation, run `terraform-docs -c .config/.terraform-docs.yml .`
+
+sections:
+  show:
+    - header
+    - requirements
+    - resources
+    - inputs
+    - outputs
+
+sort:
+  enabled: true
+  by: name
+
+output:
+  file: README.md
+  mode: replace
