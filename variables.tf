@@ -132,6 +132,12 @@ variable "control_finding_generator" {
   }
 }
 
+variable "delegate_security_hub" {
+  description = "Delegate Security Hub to a child account, used to prevent prevent count prediction errors"
+  type        = bool
+  default     = false
+}
+
 variable "delegation_account_id" {
   description = <<-DOC
   Designate a delegated account as the Security Hub administrator
